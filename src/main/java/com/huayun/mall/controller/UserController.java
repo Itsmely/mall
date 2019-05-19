@@ -1,11 +1,13 @@
 package com.huayun.mall.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.huayun.mall.controller.viewObject.UserVO;
 import com.huayun.mall.error.BusinessException;
 import com.huayun.mall.error.EmBusinessError;
 import com.huayun.mall.response.CommonReturnType;
 import com.huayun.mall.service.UserService;
 import com.huayun.mall.service.model.UserModel;
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
+@CrossOrigin(allowedHeaders = "*",allowCredentials = "true")
 public class UserController extends BaseController {
 
     @Resource
@@ -27,9 +30,35 @@ public class UserController extends BaseController {
     @Resource
     private HttpServletRequest httpServletRequest;
 
+    //用户注册接口
+    @PostMapping(value = "/register",consumes = CONSUMES_TYPE)
+    @ResponseBody
+    public CommonReturnType register(@RequestParam(name = "telphone") String telphone,
+                                    @RequestParam(name = "name") String name,
+                                    @RequestParam(name = "gender") Integer gender,
+                                    @RequestParam(name = "age") Integer age,
+                                    @RequestParam(name = "otpCode") String otpCode,
+                                     @RequestParam(name="password") String password) throws BusinessException {
+        //验证手机号和对应的optCode相符合
+        String otp = (String) httpServletRequest.getSession().getAttribute("telphone");
+        if(!StringUtils.equals(otpCode,otp)){
+            throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR,"短信验证码错误");
+        }
+        //用户的注册流程
+        UserModel userModel = new UserModel();
+        userModel.setName(name);
+        userModel.setGender(gender);
+        userModel.setAge(age);
+        userModel.setTelphone(telphone);
+        userModel.setRegisterMode("byphone");
+        userModel.setEncrptPassword(MD5Encoder.encode(password.getBytes()));
+
+        userService.register(userModel);
+        return CommonReturnType.create(null);
+    }
 
     //使用短信验证码获取OTP注册
-    @GetMapping("/getotp")
+    @PostMapping(value = "/getotp",consumes = CONSUMES_TYPE)
     @ResponseBody
     public CommonReturnType getOtp(@RequestParam(name="telphone") String telphone){
         //生成随机短信验证码

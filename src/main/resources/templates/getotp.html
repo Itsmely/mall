@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>用户注册</title>
     <link rel="stylesheet" href="../static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="../static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="../static/js/jquery-1.11.2.js"></script>
@@ -10,25 +10,53 @@
 <body>
 <form>
     <div class="container">
+        <div class="form-group"><h1>注册页面</h1></div><br>
         <div class="form-group">
-            <label for="telphone">输入手机号获得验证码</label>
+            <label for="telphone">输入手机号</label>
             <input type="text" class="form-control" id="telphone" name="telphone" placeholder="手机号">
         </div>
         <button type="submit" class="btn btn-default" id="getotp">获取短信</button>
     </div>
 
 </form>
-</body>
+
 
 <script>
-    jQuery(document).reday(function () {
+    jQuery(document).ready(function () {
         //绑定otp的click事件，用于向后端发送获取短信的请求
-        $("#getotp").click(function () {
-            $.ajax({
+        $("#getotp").on("click",function () {
+            var telphone = $("#telphone").val();
+            if(telphone == null || telphone == ""){
+                alert("手机号不能为空");
+                return false;
+            }
 
-            })
-        })
-    })
+            $.ajax({
+                type:"POST",
+                contentType:"application/x-www-form-urlencoded",
+                url:"http://localhost:80/user/getotp",
+                data:{
+                    "telphone":$("#telphone").val()
+                },
+                xhrFields:{withCredentials:true},
+                success:function (data) {
+                    if(data.status == "success"){
+                        alert("otp已发送到您手机，请查收");
+                        window.location.href = "./register.html"
+                    }else{
+                        alert("otp发送失败，错误原因"+data.data.errMsg);
+                    }
+                },
+                fail:function (data) {
+                    alert("otp发送失败，原因为"+data.responseText);
+                }
+            });
+            return false;
+        });
+    });
 
 </script>
+
+</body>
+
 </html>
