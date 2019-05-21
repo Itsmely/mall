@@ -1,14 +1,14 @@
 package com.huayun.mall.dao;
 
 import com.huayun.mall.dataobject.UserPasswordDO;
-import com.huayun.mall.dataobject.UserPasswordDOExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserPasswordDOMapper {
-    long countByExample(UserPasswordDOExample example);
+    //long countByExample(UserPasswordDOExample example);
 
-    int deleteByExample(UserPasswordDOExample example);
+    //int deleteByExample(UserPasswordDOExample example);
 
     int deleteByPrimaryKey(Integer id);
 
@@ -16,15 +16,15 @@ public interface UserPasswordDOMapper {
 
     int insertSelective(UserPasswordDO record);
 
-    List<UserPasswordDO> selectByExample(UserPasswordDOExample example);
+    //List<UserPasswordDO> selectByExample(UserPasswordDOExample example);
 
     UserPasswordDO selectByUserId(Integer userId);
 
     UserPasswordDO selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") UserPasswordDO record, @Param("example") UserPasswordDOExample example);
+    //int updateByExampleSelective(@Param("record") UserPasswordDO record, @Param("example") UserPasswordDOExample example);
 
-    int updateByExample(@Param("record") UserPasswordDO record, @Param("example") UserPasswordDOExample example);
+    //int updateByExample(@Param("record") UserPasswordDO record, @Param("example") UserPasswordDOExample example);
 
     int updateByPrimaryKeySelective(UserPasswordDO record);
 

@@ -36,8 +36,16 @@
         </javaClientGenerator>
 
         <!--生成的表及类名 -->
-        <table schema="hamll" tableName="user_info" domainObjectName="UserDO" ></table>
-        <table schema="hamll" tableName="user_password" domainObjectName="UserPasswordDO" ></table>
+        <!--<table schema="hmall" tableName="user_info" domainObjectName="UserDO" ></table>
+        <table schema="hmall" tableName="user_password" domainObjectName="UserPasswordDO" ></table>
+-->
+        <table schema="hmall" tableName="item" domainObjectName="ItemDO"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="hmall" tableName="item_stock" domainObjectName="ItemStockDO"
+        enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+        enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
-    </context>
+
+</context>
 </generatorConfiguration>

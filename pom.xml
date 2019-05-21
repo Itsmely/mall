@@ -102,8 +102,8 @@
                 <configuration>
                     <!-- 允许移动生成的文件 -->
                     <verbose>true</verbose>
-                    <!--允许自动覆盖 -->
-                    <overwrite>true</overwrite>
+                    <!--不允许自动覆盖 -->
+                    <overwrite>false</overwrite>
                     <!-- mybatis-generator配置文件 -->
                     <configurationFile>src/main/resources/mybatis-generator.xml</configurationFile>
                 </configuration>

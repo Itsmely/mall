@@ -29,7 +29,7 @@ import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
-@CrossOrigin(allowedHeaders = "*",allowCredentials = "true") //允许跨域请求
+@CrossOrigin(origins = {"*"},allowCredentials = "true") //允许跨域请求
 public class UserController extends BaseController {
 
     @Resource

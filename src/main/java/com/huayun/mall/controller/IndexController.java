@@ -11,9 +11,6 @@ import javax.annotation.Resource;
 
 @Controller
 public class IndexController {
-    @Resource
-    private UserDOMapper userDOMapper;
-
     @GetMapping("/")
     @ResponseBody
     public String index(){
