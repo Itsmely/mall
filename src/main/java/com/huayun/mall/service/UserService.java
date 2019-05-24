@@ -9,7 +9,7 @@ public interface UserService {
     //注册用户
     void register(UserModel userModel) throws BusinessException;
     //登陆验证用户合法性
-    UserModel validateLogin(String telphone,String password) throws BusinessException;
+    UserModel validateLogin(String telphone, String password) throws BusinessException;
 
 
 }

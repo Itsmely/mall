@@ -53,7 +53,7 @@ public class UserController extends BaseController {
         //将用户信息写入session
         UserVO userVO = convertFromModel(userModel);
         httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
-        httpServletRequest.getSession().setAttribute("LOGIN_USER",userVO);
+        httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
 
         httpServletRequest.getSession().setAttribute("USER_NAME",userVO.getName());
 

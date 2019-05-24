@@ -22,10 +22,21 @@ public class ItemModel {
     @NotBlank(message = "商品描述不能为空")
     private String description;
 
-    private String sales;
+    private Integer sales;
 
     @NotBlank(message = "商品图片不能为空")
     private String imgUrl;
+
+    //使用聚合模型，如果proModel不为空，则表示其拥有还未结束的秒杀聚合对象
+    private PromoModel promoModel;
+
+    public PromoModel getPromoModel() {
+        return promoModel;
+    }
+
+    public void setPromoModel(PromoModel promoModel) {
+        this.promoModel = promoModel;
+    }
 
     public Integer getId() {
         return id;
@@ -67,11 +78,11 @@ public class ItemModel {
         this.description = description;
     }
 
-    public String getSales() {
+    public Integer getSales() {
         return sales;
     }
 
-    public void setSales(String sales) {
+    public void setSales(Integer sales) {
         this.sales = sales;
     }
 
